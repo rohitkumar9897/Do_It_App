@@ -18,20 +18,19 @@ import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-BottomNavigationView bottomNavigationView;
+
 
 public class MainActivity extends AppCompatActivity {
     Button button;
-    FirebaseAuth auth;
-    FirebaseUser user;
+    BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-bottomNavigationView = findViewById(R.id.bottomNavigation);
-        //bottomNavigationView.setItemHorizontalTranslationEnabled(true);
-        //bottomNavigationView.setActivated(true);
+        bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.inflateMenu(R.menu.bottom_navigation_menu);
+
+
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -54,19 +53,12 @@ bottomNavigationView = findViewById(R.id.bottomNavigation);
                     return true;
                 }
                 return false;
-        button=findViewById(R.id.btn_logout);
-        auth = FirebaseAuth.getInstance();
-        user = auth.getCurrentUser();
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                FirebaseAuth.getInstance().signOut();
-                Intent intent= new Intent(getApplicationContext(), Signin.class);
-                startActivity(intent);
-                finish();
             }
         });
+
+
+
+
+
     }
 }
