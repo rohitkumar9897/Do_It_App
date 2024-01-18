@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:padding="20sp">
+
+    <TextView
+        android:text="Welcome to"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="#525FE1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:layout_marginTop="15sp"
+        android:background="@drawable/logo"
+        android:layout_width="100sp"
+        android:layout_height="100sp"/>
+
+    <TextView
+        android:layout_marginTop="15sp"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Let's make every task a accomplishment together"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:text="Login"
+        android:textColor="#ffff"
+        android:backgroundTint="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="300sp"
+        android:layout_width="match_parent"
+        android:layout_height="55sp"/>
+    <Button
+        android:id="@+id/btn_signup"
+        android:textColor="#000000"
+        android:backgroundTint="#77929293"
+        android:text="Signup"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="10sp"
+        android:layout_width="match_parent"
+        android:layout_height="55sp"/>
+
+</LinearLayout>
