@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Do It</string>
-    <string name="sign_in">Sign in</string>
+  
+  <string name="sign_in">Sign in</string>
+  <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="email">Email</string>
     <string name="welcome_back_login_into_your_details">Welcome back, login into your details</string>
     <string name="password">Password</string>
