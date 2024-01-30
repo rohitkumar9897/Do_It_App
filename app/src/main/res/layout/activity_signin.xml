@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:drawableLeftCompat="@drawable/baseline_email"
-        android:drawablePadding="10dp"/>
+        android:drawablePadding="10sp"/>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:drawableLeftCompat="@drawable/baseline_password"
-        android:drawablePadding="10dp"/>
+        android:drawablePadding="10sp"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -87,7 +87,7 @@
         android:textSize="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10sp"/>
 
     <Button
         android:id="@+id/btn_google"
@@ -95,9 +95,9 @@
         android:textSize="15sp"
         app:drawableLeftCompat="@drawable/google_logo_svg"
         android:textColor="@color/black"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="10sp"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="55sp"
         android:backgroundTint="#77C3C6ED"/>
     <Button
         android:id="@+id/btn_facebook"
@@ -105,9 +105,9 @@
         android:textSize="15sp"
         app:drawableLeftCompat="@drawable/facebook_logo_svg"
         android:textColor="@color/black"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="10sp"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="55sp"
         android:backgroundTint="#77C3C6ED"/>
     <ProgressBar
         android:id="@+id/progressBar"
@@ -117,9 +117,9 @@
 
     <Button
         android:id="@+id/btn_signin"
-        android:layout_width="383dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="70dp"
+        android:layout_width="370sp"
+        android:layout_height="55sp"
+        android:layout_marginTop="70sp"
         android:backgroundTint="#525FE1"
         android:text="Signin"
         android:textSize="18dp" />
@@ -129,7 +129,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:padding="10dp">
+        android:padding="10sp">
 
         <TextView
             android:text="Don't have an account?"
@@ -147,7 +147,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#525FE1"
-            android:layout_marginLeft="5dp"/>
+            android:layout_marginLeft="5sp"/>
 
     </LinearLayout>
 
