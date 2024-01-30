@@ -10,6 +10,8 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import codeit.apps.doit.Fragments.FocusFragment;
+
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         //bottomNavigationView.setItemHorizontalTranslationEnabled(true);
         //bottomNavigationView.setActivated(true);
         bottomNavigationView.inflateMenu(R.menu.bottom_navigation_menu);
+        getSupportFragmentManager().beginTransaction().replace(R.id.mainActivityFrameLayout, new FocusFragment()).commit();
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -32,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Tasks Selected", Toast.LENGTH_SHORT).show();
                     return true;
                 } else if (itemId == R.id.Focus_nav) {
-                    Toast.makeText(MainActivity.this, "Focus Selected", Toast.LENGTH_SHORT).show();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.mainActivityFrameLayout, new FocusFragment()).commit();
                     return true;
                 } else if (itemId == R.id.Profile_nav) {
                     Toast.makeText(MainActivity.this, "Profile Selected", Toast.LENGTH_SHORT).show();
