@@ -1,7 +1,13 @@
 package codeit.apps.doit;
 
+import static java.security.AccessController.getContext;
+
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,15 +17,23 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
 import codeit.apps.doit.Fragments.FocusFragment;
 import android.view.View;
 import android.widget.Button;
+
+import android.widget.Toolbar;
+
+import com.google.android.material.navigation.NavigationView;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+
+    private DrawerLayout drawerLayout;
     Button button;
     BottomNavigationView bottomNavigationView;
     @Override
@@ -28,7 +42,26 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.inflateMenu(R.menu.bottom_navigation_menu);
+
+
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open,
+                R.string.nav_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+            navigationView.setCheckedItem(R.id.nav_home);
+        }
+
+
+
         getSupportFragmentManager().beginTransaction().replace(R.id.mainActivityFrameLayout, new FocusFragment()).commit();
+
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -55,8 +88,39 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id= item.getItemId();
 
+        if(id==R.id.nav_home){
+            Intent intent= new Intent(MainActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }else if(id==R.id.nav_about){
+            getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new AboutFragment()).commit();
+        }else if(id==R.id.nav_settings){
+            getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
+        }else if(id==R.id.nav_share){
+            Toast.makeText(this, "Share your Profile", Toast.LENGTH_SHORT).show();
+        }else if(id== R.id.nav_logout){
+            Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show();
+            FirebaseAuth.getInstance().signOut();
+            Intent intent= new Intent(MainActivity.this, Signin.class);
+            startActivity(intent);
+            finish();
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
 
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 }
