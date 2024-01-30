@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,9 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DoIt"
         tools:targetApi="31">
-        <activity
-            android:name=".Onboarding"
-            android:exported="false" />
+
         <activity
             android:name=".Splash_Screen"
             android:exported="true">
@@ -24,9 +24,34 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".WelcomeActivity"
+            android:exported="true">
+
+        </activity>
+
+        <activity
+            android:name=".Signin"
+            android:exported="true"
+            android:theme="@style/Theme.Material3.Light.NoActionBar"/>
+
+        <activity
+            android:name=".Signup"
+            android:exported="false"
+            android:theme="@style/Theme.Material3.Light.NoActionBar" />
+
+        <activity
+            android:name=".ForgotPassword"
+            android:exported="false" />
+
+        <activity
+            android:name=".Onboarding"
+            android:exported="false" />
+
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>
