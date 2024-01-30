@@ -123,6 +123,7 @@
         android:id="@+id/btn_signin"
         android:layout_width="match_parent"
         android:layout_height="55sp"
+
         android:backgroundTint="#525FE1"
         android:text="Signin"
         android:textSize="18sp" />

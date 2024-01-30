@@ -137,11 +137,13 @@
 
     <Button
         android:id="@+id/btn_signup"
+
         android:layout_width="match_parent"
         android:layout_height="55sp"
         android:backgroundTint="#525FE1"
         android:text="Signup"
         android:textSize="18sp"/>
+
 
 
     <LinearLayout
