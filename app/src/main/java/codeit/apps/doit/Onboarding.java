@@ -16,6 +16,8 @@ public class Onboarding extends AppCompatActivity {
     ArrayList<Integer> images;
     ArrayList<String> strings;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
