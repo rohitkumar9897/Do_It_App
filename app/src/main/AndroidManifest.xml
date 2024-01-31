@@ -28,12 +28,10 @@
             android:exported="true" />
         <activity
             android:name=".Signin"
-            android:exported="true"
-            android:theme="@style/Theme.Material3.Light.NoActionBar" />
+            android:exported="true" />
         <activity
             android:name=".Signup"
-            android:exported="false"
-            android:theme="@style/Theme.Material3.Light.NoActionBar" />
+            android:exported="false" />
         <activity
             android:name=".ForgotPassword"
             android:exported="false" />
@@ -42,8 +40,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:exported="false" />
     </application>
 
 </manifest>
