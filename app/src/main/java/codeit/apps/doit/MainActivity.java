@@ -53,10 +53,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 R.string.nav_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_home);
-        }
 
 
 
@@ -99,9 +95,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent);
             finish();
         }else if(id==R.id.nav_about){
-            getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new AboutFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AboutFragment()).commit();
         }else if(id==R.id.nav_settings){
-            getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
         }else if(id==R.id.nav_share){
             Toast.makeText(this, "Share your Profile", Toast.LENGTH_SHORT).show();
         }else if(id== R.id.nav_logout){
