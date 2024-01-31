@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
+
         getSupportFragmentManager().beginTransaction().replace(R.id.mainActivityFrameLayout, new FocusFragment()).commit();
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
