@@ -1,21 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.FocusFragment">
+    tools:context=".Fragments.FocusFragment"
+    android:orientation="vertical"
+    android:background="#333C4B"
+    android:gravity="center">
 
-    <Chronometer
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="380dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/focus_chronometer_bg"
+        android:elevation="5dp"
+        android:gravity="center">
+
+        <Chronometer
+            android:id="@+id/FocusChronometer"
+            android:layout_width="wrap_content"
+            android:elevation="10dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColorHighlight="@color/white"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="50sp" />
+
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#525FE1"/>
+        android:orientation="horizontal"
+        android:layout_gravity="bottom">
+        <Button
+            android:layout_margin="16dp"
+            android:id="@+id/FocusStartBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_bg"
+            android:text="START"/>
+        <Button
+            android:id="@+id/FocusStopBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="16dp"
+            android:background="@drawable/button_bg"
+            android:text="STOP"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start"/>
+
+    </LinearLayout>
 
 
 
 
-</FrameLayout>
+
+
+</LinearLayout>

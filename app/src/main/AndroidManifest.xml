@@ -14,7 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DoIt"
         tools:targetApi="31">
-
         <activity
             android:name=".Splash_Screen"
             android:exported="true">
@@ -24,31 +23,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".WelcomeActivity"
-            android:exported="true">
-
-        </activity>
-
+            android:exported="true" />
         <activity
             android:name=".Signin"
-            android:exported="true"
-            android:theme="@style/Theme.Material3.Light.NoActionBar"/>
-
+            android:exported="true" />
         <activity
             android:name=".Signup"
-            android:exported="false"
-            android:theme="@style/Theme.Material3.Light.NoActionBar" />
-
+            android:exported="false" />
         <activity
             android:name=".ForgotPassword"
             android:exported="false" />
-
         <activity
             android:name=".Onboarding"
             android:exported="false" />
-
         <activity
             android:name=".MainActivity"
             android:exported="true" />
