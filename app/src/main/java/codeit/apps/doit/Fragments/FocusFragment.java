@@ -17,6 +17,7 @@ import codeit.apps.doit.R;
 public class FocusFragment extends Fragment {
     private Button startButton, stopButton;
     Chronometer chronometer;
+    private boolean isRunning;
 
 
     public FocusFragment() {
@@ -40,18 +41,33 @@ public class FocusFragment extends Fragment {
         startButton = view.findViewById(R.id.FocusStartBtn);
         stopButton = view.findViewById(R.id.FocusStopBtn);
         chronometer = view.findViewById(R.id.FocusChronometer);
+        stopButton.setVisibility(View.GONE);
+        isRunning = false;
 
 
 
-        startButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "Clicked", Toast.LENGTH_SHORT).show();
+
+        startButton.setOnClickListener(v -> {
+            if(!isRunning){
+                Toast.makeText(getContext(), "start", Toast.LENGTH_SHORT).show();
+
                 chronometer.setBase(SystemClock.elapsedRealtime());
                 chronometer.start();
+                stopButton.setVisibility(View.VISIBLE);
+                startButton.setText("RESET");
 
+            }else{
+                Toast.makeText(getContext(), "start2", Toast.LENGTH_SHORT).show();
+                chronometer.setBase(SystemClock.elapsedRealtime());
+                chronometer.start();
+                stopButton.setVisibility(View.GONE);
+                startButton.setText("START");
 
             }
+
+
+
+
         });
 
 
@@ -59,6 +75,7 @@ public class FocusFragment extends Fragment {
         stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getContext(), "stop", Toast.LENGTH_SHORT).show();
                 chronometer.stop();
 
             }

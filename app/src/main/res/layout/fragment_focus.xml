@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.FocusFragment"
     android:orientation="vertical"
+    android:background="#333C4B"
     android:gravity="center">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,10 +20,11 @@
         <Chronometer
             android:id="@+id/FocusChronometer"
             android:layout_width="wrap_content"
+            android:elevation="10dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColorHighlight="@color/white"
-            android:textColor="#525FE1"
+            android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="50sp" />
 
@@ -37,19 +40,21 @@
         android:orientation="horizontal"
         android:layout_gravity="bottom">
         <Button
-            android:layout_margin="10dp"
+            android:layout_margin="16dp"
             android:id="@+id/FocusStartBtn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Start"/>
+            android:background="@drawable/button_bg"
+            android:text="START"/>
         <Button
             android:id="@+id/FocusStopBtn"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_margin="10dp"
-            android:text="Stop"/>
+            android:layout_margin="16dp"
+            android:background="@drawable/button_bg"
+            android:text="STOP"/>
 
 
     </LinearLayout>
