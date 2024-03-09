@@ -46,10 +46,11 @@ public class FocusFragment extends Fragment {
 
 
 
-        startButton.setOnClickListener(v -> {
 
+        startButton.setOnClickListener(v -> {
             if(!isRunning){
                 Toast.makeText(getContext(), "start", Toast.LENGTH_SHORT).show();
+
                 chronometer.setBase(SystemClock.elapsedRealtime());
                 chronometer.start();
                 stopButton.setVisibility(View.VISIBLE);

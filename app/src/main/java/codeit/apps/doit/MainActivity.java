@@ -85,9 +85,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent);
             finish();
         }else if(id==R.id.nav_about){
-            getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new AboutFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AboutFragment()).commit();
         }else if(id==R.id.nav_settings){
-            getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit();
         }else if(id==R.id.nav_share){
             Intent shareIntent = new Intent();
             shareIntent.setAction(Intent.ACTION_SEND);

@@ -21,7 +21,5 @@
         android:background="#333C4B"
         android:layout_alignParentBottom="true" />
 
-
-
 </LinearLayout>
 
