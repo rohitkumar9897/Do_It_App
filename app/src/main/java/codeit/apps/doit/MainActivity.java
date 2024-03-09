@@ -42,25 +42,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.inflateMenu(R.menu.bottom_navigation_menu);
-
-
-        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        drawerLayout = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open,
-                R.string.nav_close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-       /* if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_home);
-        }*/
-
-
-
         getSupportFragmentManager().beginTransaction().replace(R.id.mainActivityFrameLayout, new FocusFragment()).commit();
+
+
+
+
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -103,7 +89,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }else if(id==R.id.nav_settings){
             getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
         }else if(id==R.id.nav_share){
-            Toast.makeText(this, "Share your Profile", Toast.LENGTH_SHORT).show();
+            Intent shareIntent = new Intent();
+            shareIntent.setAction(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            String shareMessage = "Hey There! Let's make our days more productive with this amazing app";
+            shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+            Intent chooserIntent = Intent.createChooser(shareIntent, "Share via");
+            if (shareIntent.resolveActivity(getPackageManager()) != null) {
+                startActivity(chooserIntent);
+            } else {
+                Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+            }
+            return true;
+
+            //Toast.makeText(this, "Share your Profile", Toast.LENGTH_SHORT).show();
         }else if(id== R.id.nav_logout){
             Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show();
             FirebaseAuth.getInstance().signOut();
