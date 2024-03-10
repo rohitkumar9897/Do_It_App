@@ -8,9 +8,11 @@ import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ExpandableListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import codeit.apps.doit.R;
@@ -21,6 +23,7 @@ public class FocusFragment extends Fragment {
     ExpandableListView expandableChoice;
     Chronometer chronometer;
     private boolean isRunning;
+    Spinner modeChoice;
 
 
     public FocusFragment() {
@@ -46,6 +49,7 @@ public class FocusFragment extends Fragment {
         chronometer = view.findViewById(R.id.FocusChronometer);
         resumeButton = view.findViewById(R.id.FocusResumeButton);
         resetButton = view.findViewById(R.id.FocusResetButton);
+        modeChoice = view.findViewById(R.id.focus_mode_spinner);
        // expandableChoice = view.findViewById(R.id.expandable_choice);
 
 
@@ -57,6 +61,22 @@ public class FocusFragment extends Fragment {
 
         isRunning = false;
 
+        modeChoice.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedMode = (String) parent.getItemAtPosition(position);
+                if(selectedMode == "Timer"){
+                    Toast.makeText(getContext(), "timer", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getContext(), "Focus", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
         startButton.setOnClickListener(v -> {

@@ -17,7 +17,6 @@ public class Splash_Screen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setStatusBarColor(getResources().getColor(R.color.white));
         setContentView(R.layout.activity_splash_screen);
 
         imageView =  findViewById(R.id.Splash_Image_View);
