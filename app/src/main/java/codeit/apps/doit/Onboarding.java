@@ -24,7 +24,6 @@ public class Onboarding extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setStatusBarColor(getResources().getColor(R.color.blue));
         setContentView(R.layout.activity_onboarding);
 
         viewPager = findViewById(R.id.onboardingViewPager);
