@@ -50,7 +50,5 @@
         android:layout_height="wrap_content"
         android:background="#333C4B"/>
 
-
-
 </LinearLayout>
 
