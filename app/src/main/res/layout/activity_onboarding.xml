@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/black_dark"
     tools:context=".Onboarding">
 
     <androidx.viewpager.widget.ViewPager
@@ -17,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:background="@color/white"
+        android:background="@color/black_dark"
         android:orientation="horizontal">
 
         <Button
@@ -25,7 +26,14 @@
             android:layout_height="wrap_content"
             android:text="prervious"/>
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+
         <Button
+            android:id="@+id/onboardingNextBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="next"

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#333C4B"
+    tools:context=".Profile">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_back"
+        android:background="@android:color/transparent"
+        android:layout_margin="16dp"/>
+
+    <ImageButton
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/profile_pic"
+        android:layout_gravity="center"
+        android:background="@drawable/profile_pic_bg"
+        android:scaleType="centerCrop"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hey, Priyanshu!!"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:textSize="24dp"
+        android:textColor="@color/white"/>
+    <TextView
+        android:id="@+id/profile_settings_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PROFILE SETINGS"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:background="@drawable/profile_textview_bg"
+        android:textSize="16sp"
+        android:padding="8dp"
+        android:textColor="@color/white"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CHANGE THEME"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:background="@drawable/profile_textview_bg"
+        android:textSize="16sp"
+        android:padding="8dp"
+        android:textColor="@color/white"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ABOUT"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:background="@drawable/profile_textview_bg"
+        android:padding="8dp"
+        android:textSize="16sp"
+        android:textColor="@color/white"/>
+
+
+    <TextView
+        android:id="@+id/profile_share"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SHARE"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:background="@drawable/profile_textview_bg"
+        android:padding="8dp"
+        android:textSize="16sp"
+        android:textColor="@color/white"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/btn_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="LOG OUT"
+        android:gravity="center"
+        android:background="@drawable/profile_textview_bg"
+        android:padding="8dp"
+        android:layout_margin="16dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#ff0000"/>
+
+</LinearLayout>

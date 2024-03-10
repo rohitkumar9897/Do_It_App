@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,19 +8,46 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#333C4B">
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_streak_btn"
+            android:text="1"
+            android:layout_margin="10dp"
+            android:textColor="#D4A056"
+            android:drawablePadding="10dp"
+            android:paddingLeft="10dp"
+            android:background="@drawable/streak_btn_bg"/>
+        <ImageButton
+            android:id="@+id/profile_btn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/profile_pic"
+            android:scaleType="centerCrop"
+            android:background="#333C4B"
+            android:layout_margin="10dp"/>
+
+    </LinearLayout>
+
     <FrameLayout
         android:id="@+id/mainActivityFrameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottomNavigation"/>
+        android:layout_weight="1"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"/>
+        android:background="#333C4B" />
 
-
-
-</RelativeLayout>
-
+</LinearLayout>
