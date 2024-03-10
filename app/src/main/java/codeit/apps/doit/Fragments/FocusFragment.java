@@ -10,12 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 import codeit.apps.doit.R;
 
 public class FocusFragment extends Fragment {
-    private Button startButton, stopButton;
+    private Button startButton, stopButton, resumeButton, resetButton;
+    private long pausedTime = 0;
+    ExpandableListView expandableChoice;
     Chronometer chronometer;
     private boolean isRunning;
 
@@ -41,44 +44,81 @@ public class FocusFragment extends Fragment {
         startButton = view.findViewById(R.id.FocusStartBtn);
         stopButton = view.findViewById(R.id.FocusStopBtn);
         chronometer = view.findViewById(R.id.FocusChronometer);
+        resumeButton = view.findViewById(R.id.FocusResumeButton);
+        resetButton = view.findViewById(R.id.FocusResetButton);
+        expandableChoice = view.findViewById(R.id.expandable_choice);
+
+
+
+        startButton.setVisibility(View.VISIBLE);
         stopButton.setVisibility(View.GONE);
+        resumeButton.setVisibility(View.GONE);
+        resetButton.setVisibility(View.GONE);
+
         isRunning = false;
 
 
 
         startButton.setOnClickListener(v -> {
 
-            if(!isRunning){
-                Toast.makeText(getContext(), "start", Toast.LENGTH_SHORT).show();
-                chronometer.setBase(SystemClock.elapsedRealtime());
-                chronometer.start();
-                stopButton.setVisibility(View.VISIBLE);
-                startButton.setText("RESET");
-
-            }else{
-                Toast.makeText(getContext(), "start2", Toast.LENGTH_SHORT).show();
-                chronometer.setBase(SystemClock.elapsedRealtime());
-                chronometer.start();
-                stopButton.setVisibility(View.GONE);
-                startButton.setText("START");
-
-            }
+            startButton.setVisibility(View.GONE);
+            stopButton.setVisibility(View.VISIBLE);
+            resumeButton.setVisibility(View.GONE);
+            resetButton.setVisibility(View.GONE);
 
 
+            chronometer.setBase(SystemClock.elapsedRealtime());
+            chronometer.start();
+            isRunning = true;
 
 
         });
 
 
 
-        stopButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "stop", Toast.LENGTH_SHORT).show();
-                chronometer.stop();
+        stopButton.setOnClickListener(v -> {
 
-            }
+            startButton.setVisibility(View.GONE);
+            stopButton.setVisibility(View.GONE);
+            resumeButton.setVisibility(View.VISIBLE);
+            resetButton.setVisibility(View.VISIBLE);
+
+            pausedTime = SystemClock.elapsedRealtime() - chronometer.getBase();
+
+            chronometer.stop();
+            isRunning = false;
+
         });
+
+        resumeButton.setOnClickListener(v -> {
+
+            startButton.setVisibility(View.GONE);
+            stopButton.setVisibility(View.VISIBLE);
+            resumeButton.setVisibility(View.GONE);
+            resetButton.setVisibility(View.GONE);
+
+            chronometer.setBase(SystemClock.elapsedRealtime() - pausedTime);
+
+            chronometer.start();
+            isRunning = true;
+
+        });
+
+        resetButton.setOnClickListener(v -> {
+
+            startButton.setVisibility(View.VISIBLE);
+            stopButton.setVisibility(View.GONE);
+            resumeButton.setVisibility(View.GONE);
+            resetButton.setVisibility(View.GONE);
+
+            chronometer.setBase(SystemClock.elapsedRealtime());
+            chronometer.stop();
+            isRunning = false;
+
+        });
+
+
+
 
 
 
