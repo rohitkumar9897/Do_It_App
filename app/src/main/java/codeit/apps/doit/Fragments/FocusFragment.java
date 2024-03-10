@@ -46,7 +46,7 @@ public class FocusFragment extends Fragment {
         chronometer = view.findViewById(R.id.FocusChronometer);
         resumeButton = view.findViewById(R.id.FocusResumeButton);
         resetButton = view.findViewById(R.id.FocusResetButton);
-        expandableChoice = view.findViewById(R.id.expandable_choice);
+       // expandableChoice = view.findViewById(R.id.expandable_choice);
 
 
 

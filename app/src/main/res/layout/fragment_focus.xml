@@ -8,10 +8,6 @@
     android:background="#333C4B"
     android:gravity="center">
 
-    <ExpandableListView
-        android:id="@+id/expandable_choice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 
 
 
