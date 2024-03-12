@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,11 +20,13 @@ public class Onboarding_Viewpager_adapter extends PagerAdapter {
     private final Context context;
     private final ArrayList<String> strings;
     private final ArrayList<Integer> images;
+    private final View.OnClickListener skipClickListener;
 
-    public Onboarding_Viewpager_adapter(Context context, ArrayList<Integer> ImageList, ArrayList<String> Strings){
+    public Onboarding_Viewpager_adapter(Context context, ArrayList<Integer> ImageList, ArrayList<String> Strings, View.OnClickListener skipClickListener){
         this.context = context;
         this.images = ImageList;
         this.strings = Strings;
+        this.skipClickListener = skipClickListener;
 
     }
 
@@ -36,9 +39,11 @@ public class Onboarding_Viewpager_adapter extends PagerAdapter {
 
         ImageView imageView = layout.findViewById(R.id.onboardingImage);
         TextView textView = layout.findViewById(R.id.onboardingString);
+        TextView skipButton = layout.findViewById(R.id.onboarding_skip_btn);
 
         imageView.setImageResource(images.get(position));
         textView.setText(strings.get(position));
+        skipButton.setOnClickListener(skipClickListener);
 
         container.addView(layout);
         return layout;
