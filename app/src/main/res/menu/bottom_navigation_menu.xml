@@ -3,7 +3,8 @@
     <item
         android:id="@+id/Focus_nav"
         android:title="Focus"
-        android:icon="@drawable/ic_focus"/>
+        android:icon="@drawable/ic_focus"
+        />
     <item
         android:id="@+id/Tasks_nav"
         android:title="Tasks"
@@ -16,8 +17,5 @@
         android:id="@+id/Score_nav"
         android:title="Score"
         android:icon="@drawable/ic_score"/>
-    <item
-        android:id="@+id/Profile_nav"
-        android:title="Profile"
-        android:icon="@drawable/ic_profile"/>
+
 </menu>

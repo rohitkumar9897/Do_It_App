@@ -9,6 +9,11 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+
+
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -69,9 +74,6 @@ public class MainActivity extends AppCompatActivity{
                 } else if (itemId == R.id.Focus_nav) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.mainActivityFrameLayout, new FocusFragment()).commit();
                     return true;
-                } else if (itemId == R.id.Profile_nav) {
-                    Toast.makeText(MainActivity.this, "Profile Selected", Toast.LENGTH_SHORT).show();
-                    return true;
                 } else if (itemId == R.id.Calendar_nav) {
                     Toast.makeText(MainActivity.this, "Calendar Selected", Toast.LENGTH_SHORT).show();
                     return true;
@@ -85,13 +87,4 @@ public class MainActivity extends AppCompatActivity{
 
 
     }
-
-//    @Override
-//    public void onBackPressed() {
-//        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-//            drawerLayout.closeDrawer(GravityCompat.START);
-//        } else {
-//            super.onBackPressed();
-//        }
-//    }
 }
