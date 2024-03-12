@@ -1,6 +1,7 @@
 package codeit.apps.doit;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -12,7 +13,8 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Profile extends AppCompatActivity {
-    TextView shareBtn, logoutBtn;
+    TextView shareBtn, logoutBtn, profileSettings;
+    AppCompatButton backBtn;
 
 
     @SuppressLint("MissingInflatedId")
@@ -21,7 +23,9 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        profileSettings= findViewById(R.id.profile_settings_btn);
         logoutBtn= findViewById(R.id.btn_logout);
+        backBtn= findViewById(R.id.btn_back_profile);
 
         shareBtn = findViewById(R.id.profile_share);
         shareBtn.setOnClickListener(v -> {
@@ -39,6 +43,23 @@ public class Profile extends AppCompatActivity {
             }
 
 
+        });
+
+        profileSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(Profile.this, ProfileSettings.class);
+                startActivity(intent);
+            }
+        });
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Profile.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
         });
 
         logoutBtn.setOnClickListener(new View.OnClickListener() {
