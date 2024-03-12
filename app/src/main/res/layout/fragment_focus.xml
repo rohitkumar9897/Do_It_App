@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.FocusFragment"
     android:orientation="vertical"
     android:background="#333C4B"
@@ -65,9 +66,10 @@
             android:textStyle="bold"
             android:textSize="50sp" />
 
-
-
     </LinearLayout>
+
+
+
 
 
 
