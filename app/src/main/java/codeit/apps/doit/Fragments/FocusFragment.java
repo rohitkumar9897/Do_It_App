@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.os.SystemClock;
@@ -17,7 +18,10 @@ import android.widget.ExpandableListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.ktx.Firebase;
 
@@ -32,6 +36,7 @@ public class FocusFragment extends Fragment {
     private long pausedTime = 0;
     ExpandableListView expandableChoice;
     Chronometer chronometer;
+    FirebaseFirestore db;
     private boolean isRunning;
     Spinner modeChoice;
     SharedPreferences sharedPreferences;
@@ -62,7 +67,7 @@ public class FocusFragment extends Fragment {
         pauseButton= view.findViewById(R.id.FocusPauseBtn);
         modeChoice = view.findViewById(R.id.focus_mode_spinner);
        // expandableChoice = view.findViewById(R.id.expandable_choice);
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance();
         sharedPreferences = requireActivity().getSharedPreferences("user_data", Context.MODE_PRIVATE);
 
 
@@ -93,7 +98,6 @@ public class FocusFragment extends Fragment {
 
 
         startButton.setOnClickListener(v -> {
-
             startButton.setVisibility(View.GONE);
             stopButton.setVisibility(View.GONE);
             resumeButton.setVisibility(View.GONE);
@@ -103,12 +107,6 @@ public class FocusFragment extends Fragment {
             chronometer.setBase(SystemClock.elapsedRealtime());
             chronometer.start();
             isRunning = true;
-
-
-
-
-
-
         });
 
 
@@ -128,7 +126,7 @@ public class FocusFragment extends Fragment {
                     chronometer.stop();
                     isRunning = false;
 
-                    String username = sharedPreferences.getString("spname", null);
+
         });
 
 
@@ -170,6 +168,21 @@ public class FocusFragment extends Fragment {
 
     private void pushToBase(long pushTime) {
         //3000 = 3 seconds
+        String username = sharedPreferences.getString("spusername", null);
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("score", FieldValue.increment(pushTime));
+        db.collection("users").document(username).update(updates).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(getContext(), "updated", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getContext(), "not updated", Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
 
     }
