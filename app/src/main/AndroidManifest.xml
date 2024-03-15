@@ -15,6 +15,9 @@
         android:theme="@style/Theme.DoIt"
         tools:targetApi="31">
         <activity
+            android:name=".LeaderBoard"
+            android:exported="false" />
+        <activity
             android:name=".ProfileSettings"
             android:exported="false" />
         <activity
@@ -47,8 +50,6 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" />
-
-
     </application>
 
 </manifest>

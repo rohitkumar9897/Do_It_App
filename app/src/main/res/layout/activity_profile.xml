@@ -16,14 +16,24 @@
         android:background="@android:color/transparent"
         android:drawableStart="@drawable/ic_back" />
 
-    <ImageButton
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/profile_pic"
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/profile_pic_bg"
-        android:scaleType="centerCrop"
-        android:layout_marginTop="16dp"/>
+        android:elevation="5dp"
+        app:cardCornerRadius="200dp">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/profile_pic"
+            android:background="@drawable/profile_pic_bg"
+            android:scaleType="centerCrop" />
+
+    </androidx.cardview.widget.CardView>
+
+
 
     <TextView
         android:id="@+id/profile_hey"
