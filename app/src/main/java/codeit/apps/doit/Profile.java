@@ -5,6 +5,7 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -13,8 +14,9 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Profile extends AppCompatActivity {
-    TextView shareBtn, logoutBtn, profileSettings;
+    TextView shareBtn, logoutBtn, profileSettings, profileHey;
     AppCompatButton backBtn;
+    SharedPreferences sharedPreferences;
 
 
     @SuppressLint("MissingInflatedId")
@@ -22,10 +24,12 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        sharedPreferences = getSharedPreferences("user_data", MODE_PRIVATE);
 
         profileSettings= findViewById(R.id.profile_settings_btn);
         logoutBtn= findViewById(R.id.btn_logout);
         backBtn= findViewById(R.id.btn_back_profile);
+        profileHey = findViewById(R.id.profile_hey);
 
         shareBtn = findViewById(R.id.profile_share);
         shareBtn.setOnClickListener(v -> {
@@ -44,6 +48,8 @@ public class Profile extends AppCompatActivity {
 
 
         });
+
+        profileHey.setText("Hey, "+ sharedPreferences.getString("spname", null));
 
         profileSettings.setOnClickListener(new View.OnClickListener() {
             @Override
