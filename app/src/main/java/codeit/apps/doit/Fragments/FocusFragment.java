@@ -1,5 +1,7 @@
 package codeit.apps.doit.Fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,15 +17,24 @@ import android.widget.ExpandableListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.ktx.Firebase;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
 import codeit.apps.doit.R;
 
 public class FocusFragment extends Fragment {
-    private Button startButton, stopButton, resumeButton, resetButton;
+    private Button startButton, stopButton, resumeButton, pauseButton;
     private long pausedTime = 0;
     ExpandableListView expandableChoice;
     Chronometer chronometer;
     private boolean isRunning;
     Spinner modeChoice;
+    SharedPreferences sharedPreferences;
 
 
     public FocusFragment() {
@@ -45,19 +56,21 @@ public class FocusFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_focus, container, false);
 
         startButton = view.findViewById(R.id.FocusStartBtn);
-        stopButton = view.findViewById(R.id.FocusStopBtn);
+        stopButton = view.findViewById(R.id.FocusStopButton);
         chronometer = view.findViewById(R.id.FocusChronometer);
         resumeButton = view.findViewById(R.id.FocusResumeButton);
-        resetButton = view.findViewById(R.id.FocusResetButton);
+        pauseButton= view.findViewById(R.id.FocusPauseBtn);
         modeChoice = view.findViewById(R.id.focus_mode_spinner);
        // expandableChoice = view.findViewById(R.id.expandable_choice);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        sharedPreferences = requireActivity().getSharedPreferences("user_data", Context.MODE_PRIVATE);
 
 
 
         startButton.setVisibility(View.VISIBLE);
         stopButton.setVisibility(View.GONE);
         resumeButton.setVisibility(View.GONE);
-        resetButton.setVisibility(View.GONE);
+        pauseButton.setVisibility(View.GONE);
 
         isRunning = false;
 
@@ -82,14 +95,18 @@ public class FocusFragment extends Fragment {
         startButton.setOnClickListener(v -> {
 
             startButton.setVisibility(View.GONE);
-            stopButton.setVisibility(View.VISIBLE);
+            stopButton.setVisibility(View.GONE);
             resumeButton.setVisibility(View.GONE);
-            resetButton.setVisibility(View.GONE);
+            pauseButton.setVisibility(View.VISIBLE);
 
 
             chronometer.setBase(SystemClock.elapsedRealtime());
             chronometer.start();
             isRunning = true;
+
+
+
+
 
 
         });
@@ -98,24 +115,30 @@ public class FocusFragment extends Fragment {
 
         stopButton.setOnClickListener(v -> {
 
-            startButton.setVisibility(View.GONE);
-            stopButton.setVisibility(View.GONE);
-            resumeButton.setVisibility(View.VISIBLE);
-            resetButton.setVisibility(View.VISIBLE);
+                    startButton.setVisibility(View.VISIBLE);
+                    stopButton.setVisibility(View.GONE);
+                    resumeButton.setVisibility(View.GONE);
+                    pauseButton.setVisibility(View.GONE);
 
-            pausedTime = SystemClock.elapsedRealtime() - chronometer.getBase();
+                    long pushTime = SystemClock.elapsedRealtime() - chronometer.getBase();
+                    pushToBase(pushTime);
 
-            chronometer.stop();
-            isRunning = false;
 
+                    chronometer.setBase(SystemClock.elapsedRealtime());
+                    chronometer.stop();
+                    isRunning = false;
+
+                    String username = sharedPreferences.getString("spname", null);
         });
+
+
 
         resumeButton.setOnClickListener(v -> {
 
             startButton.setVisibility(View.GONE);
-            stopButton.setVisibility(View.VISIBLE);
+            stopButton.setVisibility(View.GONE);
             resumeButton.setVisibility(View.GONE);
-            resetButton.setVisibility(View.GONE);
+            pauseButton.setVisibility(View.VISIBLE);
 
             chronometer.setBase(SystemClock.elapsedRealtime() - pausedTime);
 
@@ -124,27 +147,30 @@ public class FocusFragment extends Fragment {
 
         });
 
-        resetButton.setOnClickListener(v -> {
+        pauseButton.setOnClickListener(v -> {
 
-            startButton.setVisibility(View.VISIBLE);
-            stopButton.setVisibility(View.GONE);
-            resumeButton.setVisibility(View.GONE);
-            resetButton.setVisibility(View.GONE);
+            startButton.setVisibility(View.GONE);
+            stopButton.setVisibility(View.VISIBLE);
+            resumeButton.setVisibility(View.VISIBLE);
+            pauseButton.setVisibility(View.GONE);
 
-            chronometer.setBase(SystemClock.elapsedRealtime());
+            pausedTime = SystemClock.elapsedRealtime() - chronometer.getBase();
+
             chronometer.stop();
             isRunning = false;
+
+
 
         });
 
 
 
-
-
-
-
-
-
         return view;
+    }
+
+    private void pushToBase(long pushTime) {
+        //3000 = 3 seconds
+
+
     }
 }
