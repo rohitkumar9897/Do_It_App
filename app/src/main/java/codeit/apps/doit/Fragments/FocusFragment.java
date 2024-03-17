@@ -11,10 +11,12 @@ import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -59,6 +61,20 @@ public class FocusFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_focus, container, false);
+
+
+
+        LinearLayout chronometerLL = view.findViewById(R.id.chronometer_linear_layout);
+        chronometerLL.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                int width = chronometerLL.getWidth();
+                chronometerLL.getLayoutParams().height = width;
+                chronometerLL.requestLayout();
+
+            }
+        });
+
 
         startButton = view.findViewById(R.id.FocusStartBtn);
         stopButton = view.findViewById(R.id.FocusStopButton);

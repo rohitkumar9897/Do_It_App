@@ -1,15 +1,11 @@
 package codeit.apps.doit;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -21,11 +17,9 @@ import android.widget.Toast;
 
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,8 +47,19 @@ public class ProfileSettings extends AppCompatActivity {
         profileSettingsUserNameET = findViewById(R.id.edit_text_username);
         profileSettingsCountryET= findViewById(R.id.edit_text_country);
         db = FirebaseFirestore.getInstance();
+        boolean isSignUp = false;
 
         sharedPreferences = getSharedPreferences("user_data", MODE_PRIVATE);
+
+        if(!isSignUp){
+            setValues();
+            profileSettingsUserNameET.setEnabled(false);
+            profileSettingsUserNameET.setFocusable(false);
+
+
+        }
+
+
 
 
 
@@ -64,9 +69,12 @@ public class ProfileSettings extends AppCompatActivity {
             String age = String.valueOf(profileSettingsAgeET.getText());
             String country = String.valueOf(profileSettingsCountryET.getText());
 
-            updateSharedPreference(name, userName, age, country);
-            pushToFireBase(name, userName, age, country);
+            if(isSignUp){
+                createAccount(name, userName, age, country);
+            }else{
 
+                pushToFireBase(name, userName, age, country);
+            }
         });
         SelectPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,21 +85,21 @@ public class ProfileSettings extends AppCompatActivity {
         });
     }
 
-    private void pushToFireBase(String name, String userName, String age, String country) {
-        Log.d("priyanshu","-1");
+    private void pushToFireBase (String name, String userName, String age, String country) {
+        updateSharedPreference(name, userName, age, country);
+
+    }
+
+    private void createAccount(String name, String userName, String age, String country) {
 
 
 
         db.collection("users").document(userName).get().addOnCompleteListener(task -> {
-            Log.d("priyanshu","1");
             if (task.isSuccessful()) {
-                Log.d("priyanshu","2");
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
-                    Log.d("priyanshu","3");
                     Toast.makeText(getApplicationContext(), "Username already exists", Toast.LENGTH_SHORT).show();
                 } else {
-                    Log.d("priyanshu","4");
                     Map<String, Object> user = new HashMap<>();
                     user.put("username", userName);
                     user.put("name", name);
@@ -101,6 +109,7 @@ public class ProfileSettings extends AppCompatActivity {
                     db.collection("users").document(userName).set(user)
                             .addOnSuccessListener(aVoid -> {
                                 Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
+                                updateSharedPreference(name, userName, age, country);
                                 // User added successfully
                             })
                             .addOnFailureListener(e -> {
@@ -127,6 +136,18 @@ public class ProfileSettings extends AppCompatActivity {
         Intent iGallery= new Intent(Intent.ACTION_PICK);
         iGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(iGallery, GALLARY_REQ_CODE);
+    }
+
+
+
+
+    private void setValues(){
+
+        profileSettingsUserNameET.setText(sharedPreferences.getString("spusername", null));
+        profileSettingsNameET.setText(sharedPreferences.getString("spname", null));
+        profileSettingsAgeET.setText(sharedPreferences.getString("spage", null));
+        profileSettingsCountryET.setText(sharedPreferences.getString("spcountry", null));
+
     }
 
     @Override

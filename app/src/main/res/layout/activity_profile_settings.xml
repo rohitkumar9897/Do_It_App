@@ -8,6 +8,7 @@
     tools:context=".ProfileSettings"
     android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:background="@color/black_dark"
     android:padding="10sp">
 
     <com.google.android.material.card.MaterialCardView
@@ -16,7 +17,7 @@
         android:layout_height="150dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="10dp"
-        android:layout_marginTop="20sp">
+        android:layout_marginTop="40dp">
 
         <ImageView
             android:id="@+id/imgprofile"
@@ -28,6 +29,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <TextView
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Please enter your following details"
@@ -114,6 +116,11 @@
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+
     <Button
         android:id="@+id/btnUpdateProfile"
         android:layout_width="match_parent"
@@ -122,9 +129,6 @@
         android:text="Update Details"
         android:textSize="18sp"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+
 
 </LinearLayout>
