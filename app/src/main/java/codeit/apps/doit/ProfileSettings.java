@@ -1,5 +1,6 @@
 package codeit.apps.doit;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +16,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -87,6 +92,29 @@ public class ProfileSettings extends AppCompatActivity {
 
     private void pushToFireBase (String name, String userName, String age, String country) {
         updateSharedPreference(name, userName, age, country);
+
+        db.collection("users").document(userName).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot document = task.getResult();
+                Map<String, Object> userUpdates = new HashMap<>();
+                userUpdates.put("name", name);
+                userUpdates.put("age", age);
+                userUpdates.put("country", country);
+                db.collection("users").document(userName).update(userUpdates).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(ProfileSettings.this, "success", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(ProfileSettings.this, "some error occurred", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
 
     }
 
