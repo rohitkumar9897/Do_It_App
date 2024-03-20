@@ -43,6 +43,7 @@
 
 
     <LinearLayout
+        android:id="@+id/chronometer_linear_layout"
         android:layout_width="match_parent"
         android:layout_height="380dp"
         android:layout_margin="16dp"
