@@ -1,8 +1,13 @@
 package codeit.apps.doit;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -12,14 +17,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,8 +55,19 @@ public class ProfileSettings extends AppCompatActivity {
         profileSettingsUserNameET = findViewById(R.id.edit_text_username);
         profileSettingsCountryET= findViewById(R.id.edit_text_country);
         db = FirebaseFirestore.getInstance();
+        boolean isSignUp = false;
 
         sharedPreferences = getSharedPreferences("user_data", MODE_PRIVATE);
+
+        if(!isSignUp){
+            setValues();
+            profileSettingsUserNameET.setEnabled(false);
+            profileSettingsUserNameET.setFocusable(false);
+
+
+        }
+
+
 
 
 
@@ -58,9 +77,12 @@ public class ProfileSettings extends AppCompatActivity {
             String age = String.valueOf(profileSettingsAgeET.getText());
             String country = String.valueOf(profileSettingsCountryET.getText());
 
-            updateSharedPreference(name, userName, age, country);
-            pushToFireBase(name, userName, age, country);
+            if(isSignUp){
+                createAccount(name, userName, age, country);
+            }else{
 
+                pushToFireBase(name, userName, age, country);
+            }
         });
         SelectPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,8 +93,35 @@ public class ProfileSettings extends AppCompatActivity {
         });
     }
 
-    private void pushToFireBase(String name, String userName, String age, String country) {
-        Log.d("priyanshu","-1");
+    private void pushToFireBase (String name, String userName, String age, String country) {
+        updateSharedPreference(name, userName, age, country);
+
+        db.collection("users").document(userName).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot document = task.getResult();
+                Map<String, Object> userUpdates = new HashMap<>();
+                userUpdates.put("name", name);
+                userUpdates.put("age", age);
+                userUpdates.put("country", country);
+                db.collection("users").document(userName).update(userUpdates).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(ProfileSettings.this, "success", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(ProfileSettings.this, "some error occurred", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
+
+    }
+
+    private void createAccount(String name, String userName, String age, String country) {
 
 
 
@@ -95,6 +144,7 @@ public class ProfileSettings extends AppCompatActivity {
                     db.collection("users").document(userName).set(user)
                             .addOnSuccessListener(aVoid -> {
                                 Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
+                                updateSharedPreference(name, userName, age, country);
                                 // User added successfully
                             })
                             .addOnFailureListener(e -> {
@@ -121,6 +171,18 @@ public class ProfileSettings extends AppCompatActivity {
         Intent iGallery= new Intent(Intent.ACTION_PICK);
         iGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(iGallery, GALLARY_REQ_CODE);
+    }
+
+
+
+
+    private void setValues(){
+
+        profileSettingsUserNameET.setText(sharedPreferences.getString("spusername", null));
+        profileSettingsNameET.setText(sharedPreferences.getString("spname", null));
+        profileSettingsAgeET.setText(sharedPreferences.getString("spage", null));
+        profileSettingsCountryET.setText(sharedPreferences.getString("spcountry", null));
+
     }
 
     @Override
