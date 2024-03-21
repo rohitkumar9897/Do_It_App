@@ -83,6 +83,9 @@ public class ProfileSettings extends AppCompatActivity {
 
                 pushToFireBase(name, userName, age, country);
             }
+            Intent intent = new Intent(ProfileSettings.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         });
         SelectPhoto.setOnClickListener(new View.OnClickListener() {
             @Override

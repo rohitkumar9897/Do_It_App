@@ -1,4 +1,4 @@
-package codeit.apps.doit;
+package codeit.apps.doit.LeaderBoard;
 
 public class ScoreData {
     String name, image;

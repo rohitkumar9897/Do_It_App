@@ -1,49 +1,28 @@
 package codeit.apps.doit;
 
-import static java.security.AccessController.getContext;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
-
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
-
-
 import android.content.Intent;
 import android.os.Bundle;
 
 
 import android.view.MenuItem;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
 import codeit.apps.doit.Fragments.FocusFragment;
 import codeit.apps.doit.Fragments.ToDoFragment;
+import codeit.apps.doit.LeaderBoard.LeaderBoardActivity;
 
-import android.view.View;
 import android.widget.Button;
-
-import android.widget.Toolbar;
-
-import com.google.android.material.navigation.NavigationView;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 
 public class MainActivity extends AppCompatActivity{
-
-    private DrawerLayout drawerLayout;
-    Button button;
+    
     ImageView profileBtn;
     BottomNavigationView bottomNavigationView;
     @Override
@@ -82,6 +61,8 @@ public class MainActivity extends AppCompatActivity{
                     return true;
                 } else if (itemId == R.id.Score_nav) {
                     Toast.makeText(MainActivity.this, "Score Selected", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, LeaderBoardActivity.class);
+                    startActivity(intent);
                     return true;
                 }
                 return false;
