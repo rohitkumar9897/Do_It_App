@@ -20,12 +20,15 @@ import android.os.Bundle;
 
 import android.view.MenuItem;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
 import codeit.apps.doit.Fragments.FocusFragment;
+import codeit.apps.doit.Fragments.ToDoFragment;
+
 import android.view.View;
 import android.widget.Button;
 
@@ -41,7 +44,7 @@ public class MainActivity extends AppCompatActivity{
 
     private DrawerLayout drawerLayout;
     Button button;
-    ImageButton profileBtn;
+    ImageView profileBtn;
     BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +72,7 @@ public class MainActivity extends AppCompatActivity{
 
                 int itemId = item.getItemId();
                 if (itemId == R.id.Tasks_nav) {
-                    Toast.makeText(MainActivity.this, "Tasks Selected", Toast.LENGTH_SHORT).show();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.mainActivityFrameLayout, new ToDoFragment()).commit();
                     return true;
                 } else if (itemId == R.id.Focus_nav) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.mainActivityFrameLayout, new FocusFragment()).commit();
