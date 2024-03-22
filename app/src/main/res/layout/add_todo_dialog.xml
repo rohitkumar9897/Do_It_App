@@ -9,19 +9,19 @@
         android:id="@+id/add_todo_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="task"
-        android:textColorHint="@color/yellow_use"
+        android:hint="enter task here"
+        android:textColorHint="@color/white"
         android:layout_margin="16dp"
         android:textColor="@color/yellow_use"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select Date"
+        android:text="Select Priority"
         android:layout_margin="16dp"
         android:clickable="true"
         android:focusable="true"
-        android:textColor="@color/yellow_use"/>
+        android:textColor="@color/white"/>
 
 
 
