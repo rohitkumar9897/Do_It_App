@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -22,9 +23,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -80,6 +83,9 @@ public class ProfileSettings extends AppCompatActivity {
 
                 pushToFireBase(name, userName, age, country);
             }
+            Intent intent = new Intent(ProfileSettings.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         });
         SelectPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,11 +129,15 @@ public class ProfileSettings extends AppCompatActivity {
 
 
         db.collection("users").document(userName).get().addOnCompleteListener(task -> {
+            Log.d("priyanshu","1");
             if (task.isSuccessful()) {
+                Log.d("priyanshu","2");
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
+                    Log.d("priyanshu","3");
                     Toast.makeText(getApplicationContext(), "Username already exists", Toast.LENGTH_SHORT).show();
                 } else {
+                    Log.d("priyanshu","4");
                     Map<String, Object> user = new HashMap<>();
                     user.put("username", userName);
                     user.put("name", name);

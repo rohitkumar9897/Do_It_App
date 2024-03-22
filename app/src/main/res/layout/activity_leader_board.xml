@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/black_dark"
-    tools:context=".LeaderBoard">
+    tools:context=".LeaderBoard.LeaderBoardActivity"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,7 +38,18 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/leaderboard_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
     </ScrollView>
+    <ProgressBar
+        android:id="@+id/leaderboard_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,28 +63,47 @@
             android:layout_marginVertical="16dp"
             android:layout_marginHorizontal="20dp"
             android:src="@drawable/profile_pic"/>
-
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:layout_gravity="center"
-            android:textSize="24sp"
-            android:text="username"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/your_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="center"
+                android:textSize="24sp"
+                android:text="username"/>
+
+
+            <TextView
+                android:id="@+id/your_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:textSize="24sp"
+                android:layout_marginHorizontal="16dp"
+                android:text="score"/>
+        </LinearLayout>
         <View
-            android:layout_width="0dp"
-            android:layout_height="1dp"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
             android:layout_weight="1"/>
 
         <TextView
+            android:id="@+id/your_rank"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:layout_gravity="center"
             android:textSize="24sp"
             android:layout_marginHorizontal="16dp"
-            android:text="score"/>
-    </LinearLayout>
+            android:text="Rank"/>
 
+
+    </LinearLayout>
 
 </LinearLayout>

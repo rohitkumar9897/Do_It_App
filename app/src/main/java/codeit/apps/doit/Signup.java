@@ -183,7 +183,7 @@ public class Signup extends AppCompatActivity {
                     map.put("profile", user.getPhotoUrl().toString());
 
                     database.getReference().child("users").child(user.getUid()).setValue(map);
-                    Intent intent = new Intent(Signup.this, MainActivity.class);
+                    Intent intent = new Intent(Signup.this, ProfileSettings.class);
                     startActivity(intent);
                     finish();
                 } else {
