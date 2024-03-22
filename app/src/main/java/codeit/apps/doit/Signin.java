@@ -125,7 +125,7 @@ public class Signin extends AppCompatActivity {
                                 progressBar.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
                                     Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
-                                    Intent intent= new Intent(getApplicationContext(), MainActivity.class);
+                                    Intent intent= new Intent(getApplicationContext(), ProfileSettings.class);
                                     startActivity(intent);
                                     finish();
                                 } else {
@@ -184,7 +184,7 @@ public class Signin extends AppCompatActivity {
                     map.put("profile", user.getPhotoUrl().toString());
 
                     database.getReference().child("users").child(user.getUid()).setValue(map);
-                    Intent intent= new Intent(Signin.this, MainActivity.class);
+                    Intent intent= new Intent(Signin.this, ProfileSettings.class);
                     startActivity(intent);
                     finish();
                 }
