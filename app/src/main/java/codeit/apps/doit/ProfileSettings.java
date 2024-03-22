@@ -129,15 +129,11 @@ public class ProfileSettings extends AppCompatActivity {
 
 
         db.collection("users").document(userName).get().addOnCompleteListener(task -> {
-            Log.d("priyanshu","1");
             if (task.isSuccessful()) {
-                Log.d("priyanshu","2");
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
-                    Log.d("priyanshu","3");
                     Toast.makeText(getApplicationContext(), "Username already exists", Toast.LENGTH_SHORT).show();
                 } else {
-                    Log.d("priyanshu","4");
                     Map<String, Object> user = new HashMap<>();
                     user.put("username", userName);
                     user.put("name", name);
