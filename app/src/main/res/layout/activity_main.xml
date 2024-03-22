@@ -39,7 +39,7 @@
                 android:id="@+id/profile_btn"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/profile_pic"
+                android:src="@drawable/rohit_profile_pic"
                 android:scaleType="centerCrop"
                 android:background="#333C4B" />
 
