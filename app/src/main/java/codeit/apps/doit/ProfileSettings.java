@@ -28,6 +28,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,7 +56,8 @@ public class ProfileSettings extends AppCompatActivity {
         profileSettingsUserNameET = findViewById(R.id.edit_text_username);
         profileSettingsCountryET= findViewById(R.id.edit_text_country);
         db = FirebaseFirestore.getInstance();
-        boolean isSignUp = false;
+        Intent intentForSignup = getIntent();
+        boolean isSignUp = intentForSignup.getBooleanExtra("isSignUp", false);
 
         sharedPreferences = getSharedPreferences("user_data", MODE_PRIVATE);
 
@@ -66,8 +68,6 @@ public class ProfileSettings extends AppCompatActivity {
 
 
         }
-
-
 
 
 
@@ -139,7 +139,9 @@ public class ProfileSettings extends AppCompatActivity {
                     user.put("name", name);
                     user.put("age",age);
                     user.put("country", country);
-                    user.put("score", 0);
+                    user.put("dailyScore", 0);
+                    user.put("weeklyScore", 0);
+                    user.put("monthlyScore", 0);
                     db.collection("users").document(userName).set(user)
                             .addOnSuccessListener(aVoid -> {
                                 Toast.makeText(getApplicationContext(), "success", Toast.LENGTH_SHORT).show();
