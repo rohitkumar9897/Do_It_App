@@ -64,6 +64,9 @@ public class MainActivity extends AppCompatActivity{
                     Intent intent = new Intent(MainActivity.this, LeaderBoardActivity.class);
                     startActivity(intent);
                     return true;
+                }else if (itemId == R.id.Friends_nav) {
+                    Toast.makeText(MainActivity.this, "Friends Section Selected", Toast.LENGTH_SHORT).show();
+                    return true;
                 }
                 return false;
             }
