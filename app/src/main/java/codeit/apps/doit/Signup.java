@@ -133,7 +133,7 @@ public class Signup extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(Signup.this, "Account created successfully",
                                             Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(Signup.this, Signin.class));
+                                    startActivity(new Intent(Signup.this, ProfileSettings.class).putExtra("isSignUp" , true));
                                     finish();
                                 } else {
                                     // If sign in fails, display a message to the user.
@@ -148,6 +148,7 @@ public class Signup extends AppCompatActivity {
 
     private void googleSignIn() {
         Intent intent= mGoogleSignInClient.getSignInIntent();
+        intent.putExtra("isSignUp" , true);
         startActivityForResult(intent, RC_SIGN_IN);
     }
 
@@ -184,6 +185,7 @@ public class Signup extends AppCompatActivity {
 
                     database.getReference().child("users").child(user.getUid()).setValue(map);
                     Intent intent = new Intent(Signup.this, ProfileSettings.class);
+                    intent.putExtra("isSignUp" , true);
                     startActivity(intent);
                     finish();
                 } else {

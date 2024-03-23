@@ -5,14 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#333C4B"
-    tools:context=".Profile">
+    android:background="@color/black_dark"
+    tools:context=".Profile"
+    android:padding="15dp">
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_back_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="10dp"
         android:background="@android:color/transparent"
         android:drawableStart="@drawable/ic_back" />
 
@@ -25,9 +26,9 @@
         app:cardCornerRadius="200dp">
 
         <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:src="@drawable/profile_pic"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/rohit_profile_pic"
             android:background="@drawable/profile_pic_bg"
             android:scaleType="centerCrop" />
 
@@ -46,84 +47,70 @@
         android:textColor="@color/white"/>
 
 
-
-
-    <LinearLayout
-        android:layout_marginTop="24dp"
+    <TextView
+        android:drawableLeft="@drawable/ic_settings"
+        android:id="@+id/profile_settings_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="30dp"
-        android:background="@drawable/profile_textview_bg"
-        android:orientation="vertical">
+        android:layout_height="50sp"
+        android:text="PROFILE SETINGS"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/custom_textview_bg"
+        android:textSize="16sp"
+        android:padding="8dp"
+        android:textColor="@color/white"/>
 
-        <TextView
-            android:drawableLeft="@drawable/ic_settings"
-            android:id="@+id/profile_settings_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="PROFILE SETINGS"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="5dp"
-            android:gravity="center"
-            android:background="@drawable/profile_textview_bg"
-            android:textSize="16sp"
-            android:padding="8dp"
-            android:textColor="@color/white"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/white"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="CHANGE THEME"
-            android:drawableLeft="@drawable/ic_dark_mode_24"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="5dp"
-            android:gravity="center"
-            android:background="@drawable/profile_textview_bg"
-            android:textSize="16sp"
-            android:padding="8dp"
-            android:textColor="@color/white"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/white"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ABOUT"
-            android:drawableLeft="@drawable/ic_about"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="5dp"
-            android:gravity="center"
-            android:background="@drawable/profile_textview_bg"
-            android:padding="8dp"
-            android:textSize="16sp"
-            android:textColor="@color/white"/>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/white"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:text="CHANGE THEME"
+        android:drawableLeft="@drawable/ic_dark_mode_24"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:background="@drawable/custom_textview_bg"
+        android:textSize="16sp"
+        android:padding="8dp"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:text="ABOUT"
+        android:drawableLeft="@drawable/ic_about"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_textview_bg"
+        android:padding="8dp"
+        android:textSize="16sp"
+        android:textColor="@color/white"/>
 
 
-        <TextView
-            android:id="@+id/profile_share"
-            android:drawableLeft="@drawable/ic_share"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="SHARE"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="5dp"
-            android:gravity="center"
-            android:background="@drawable/profile_textview_bg"
-            android:padding="8dp"
-            android:textSize="16sp"
-            android:textColor="@color/white"/>
 
+    <TextView
+        android:id="@+id/profile_share"
+        android:drawableLeft="@drawable/ic_share"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:text="SHARE"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_textview_bg"
+        android:padding="8dp"
+        android:textSize="16sp"
+        android:textColor="@color/white"/>
 
-    </LinearLayout>
+    <TextView
+        android:id="@+id/profile_rate"
+        android:drawableLeft="@drawable/ic_rate_us"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:text="Rate Us"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_textview_bg"
+        android:padding="8dp"
+        android:textSize="16sp"
+        android:textColor="@color/white"/>
 
 
     <View
@@ -135,14 +122,13 @@
         android:id="@+id/btn_logout"
         android:drawableLeft="@drawable/ic_logout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50sp"
         android:text="LOG OUT"
         android:gravity="center"
-        android:background="@drawable/profile_textview_bg"
+        android:background="@drawable/custom_textview_bg"
         android:padding="8dp"
-        android:layout_margin="20dp"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:textColor="#ff0000"/>
+        android:textColor="#FFFFFF"/>
 
 </LinearLayout>
