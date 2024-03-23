@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,13 +21,16 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.ktx.Firebase;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -181,12 +185,75 @@ public class FocusFragment extends Fragment {
 
         return view;
     }
-
     private void pushToBase(long pushTime) {
-        //3000 = 3 seconds
         String username = sharedPreferences.getString("spusername", null);
+        //3000 = 3 seconds
+
+        Calendar calendar  = Calendar.getInstance();
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        int weekOfYear = calendar.get(Calendar.WEEK_OF_YEAR);
+        int monthOfYear = calendar.get(Calendar.MONTH);
+
+
+
+
+        db.collection("users").document(username).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot document = task.getResult();
+                    Log.d("priyanshudebug", "4");
+                    if (document != null && document.exists()) {
+                        Log.d("priyanshudebug", "3");
+                        int storedDay = document.getLong("storedDay").intValue();
+                        int storedWeek  = document.getLong("storedWeek").intValue();
+                        int storedMonth = document.getLong("storedMonth").intValue();
+
+                        Map<String, Object> updates = new HashMap<>();
+
+
+                        if(storedDay!=dayOfMonth){
+                            Log.d("priyanshudebug", "2");
+                            updates.put("dailyScore", 0);
+                            updates.put("storedDay", dayOfMonth);
+
+
+                        }
+                        if(storedWeek!=weekOfYear){
+                            Log.d("priyanshudebug", "1");
+                            updates.put("weeklyScore", 0);
+                            updates.put("storedWeek", weekOfYear);
+
+                        }
+                        if(storedMonth!=monthOfYear){
+                            updates.put("monthlyScore", 0);
+                            updates.put("storedMonth", monthOfYear);
+
+                        }
+
+                        db.collection("users").document(username).update(updates);
+
+                    }
+                }else{
+                    Toast.makeText(getContext(), "some error occurred", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+
+
+
+
         Map<String, Object> updates = new HashMap<>();
-        updates.put("score", FieldValue.increment(pushTime));
+        updates.put("dailyScore", FieldValue.increment(pushTime));
+        updates.put("weeklyScore", FieldValue.increment(pushTime));
+        updates.put("monthlyScore", FieldValue.increment(pushTime));
+
+
+
+
+
         db.collection("users").document(username).update(updates).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
