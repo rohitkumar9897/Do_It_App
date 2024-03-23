@@ -1,8 +1,11 @@
 package codeit.apps.doit.LeaderBoard;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +40,8 @@ public class LeaderBoardActivity extends AppCompatActivity {
     ScoreAdapter adapter;
     FirebaseFirestore db;
     TextView myName, myScore, myRank;
+    ImageButton chooseSection;
+    Dialog dialog;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -50,6 +55,19 @@ public class LeaderBoardActivity extends AppCompatActivity {
         myScore = findViewById(R.id.your_score);
         myRank = findViewById(R.id.your_rank);
         db = FirebaseFirestore.getInstance();
+        chooseSection = findViewById(R.id.btn_section_choose);
+
+        dialog = new Dialog(LeaderBoardActivity.this);
+        dialog.setContentView(R.layout.leaderboard_custom_dialog);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_bg));
+
+        chooseSection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.show();
+            }
+        });
 
 
         list= new ArrayList<>();
@@ -62,7 +80,7 @@ public class LeaderBoardActivity extends AppCompatActivity {
 
 
         db.collection("users")
-                .orderBy("score")
+                .orderBy("dailyScore")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
