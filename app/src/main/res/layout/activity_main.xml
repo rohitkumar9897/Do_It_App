@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,40 +8,56 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:text="Welcome to"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:textColor="#525FE1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <ImageView
-        android:layout_marginTop="15sp"
-        android:background="@drawable/logo"
-        android:layout_width="100sp"
-        android:layout_height="100sp"/>
-
-    <TextView
-        android:layout_marginTop="15sp"
-        android:textSize="20sp"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Let's make every task a accomplishment together"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal"
+        android:background="#333C4B">
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_streak_btn"
+            android:text="1"
+            android:layout_margin="10dp"
+            android:textColor="#D4A056"
+            android:drawablePadding="10dp"
+            android:paddingLeft="10dp"
+            android:background="@drawable/streak_btn_bg"/>
 
-    <Button
-        android:id="@+id/btn_logout"
-        android:backgroundTint="#525Fe1"
-        android:text="Logout"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginTop="60sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_gravity="center"
+            app:cardCornerRadius="500dp">
+
+            <ImageView
+                android:id="@+id/profile_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/rohit_profile_pic"
+                android:scaleType="centerCrop"
+                android:background="#333C4B" />
+
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/mainActivityFrameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#333C4B" />
 
 </LinearLayout>

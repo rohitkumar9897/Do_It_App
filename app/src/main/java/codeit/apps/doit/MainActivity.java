@@ -1,36 +1,74 @@
 package codeit.apps.doit;
 
-import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+
+
+import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+import codeit.apps.doit.Fragments.FocusFragment;
+import codeit.apps.doit.Fragments.ToDoFragment;
+import codeit.apps.doit.LeaderBoard.LeaderBoardActivity;
+
 import android.widget.Button;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity {
-    Button button;
-    FirebaseAuth auth;
-    FirebaseUser user;
+public class MainActivity extends AppCompatActivity{
+    
+    ImageView profileBtn;
+    BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        button=findViewById(R.id.btn_logout);
-        auth = FirebaseAuth.getInstance();
-        user = auth.getCurrentUser();
+        bottomNavigationView = findViewById(R.id.bottomNavigation);
+        bottomNavigationView.inflateMenu(R.menu.bottom_navigation_menu);
 
-        button.setOnClickListener(new View.OnClickListener() {
+
+        profileBtn = findViewById(R.id.profile_btn);
+        profileBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(this, Profile.class);
+            startActivity(intent);
+
+        });
+        getSupportFragmentManager().beginTransaction().replace(R.id.mainActivityFrameLayout, new FocusFragment()).commit();
+
+
+
+
+
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                FirebaseAuth.getInstance().signOut();
-                Intent intent= new Intent(getApplicationContext(), Signin.class);
-                startActivity(intent);
-                finish();
+                int itemId = item.getItemId();
+                if (itemId == R.id.Tasks_nav) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.mainActivityFrameLayout, new ToDoFragment()).commit();
+                    return true;
+                } else if (itemId == R.id.Focus_nav) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.mainActivityFrameLayout, new FocusFragment()).commit();
+                    return true;
+                } else if (itemId == R.id.Calendar_nav) {
+                    Toast.makeText(MainActivity.this, "Calendar Selected", Toast.LENGTH_SHORT).show();
+                    return true;
+                } else if (itemId == R.id.Score_nav) {
+                    Toast.makeText(MainActivity.this, "Score Selected", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, LeaderBoardActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
+                return false;
             }
         });
+
+
     }
 }

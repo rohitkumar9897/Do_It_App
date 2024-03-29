@@ -1,13 +1,28 @@
 <resources>
     <string name="app_name">Do It</string>
+
     <string name="sign_in">Sign in</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="email">Email</string>
     <string name="welcome_back_login_into_your_details">Welcome back, login into your details</string>
     <string name="password">Password</string>
-    <string name="or">------------------------------ or ------------------------------</string>
+    <string name="or">----------------------------------------- or -----------------------------------------</string>
     <string name="sign_up">Sign up</string>
     <string name="new_here_let_s_detup_your_account">New here, let\'s setup your account</string>
     <string name="confirm_password">Confirm password</string>
     <string name="default_web_client_id" translatable="false">753586320529-0bijj4c4fame2jlib4liqo0rtlmleha3.apps.googleusercontent.com</string>
     <string name="forgot_message">No worries - we have got your back. Please enter your email address below, and we will send you a verification code to reset your password.</string>
+    <string name="nav_open">Open Navigation Drawer</string>
+    <string name="nav_close">Close Navigation Drawer</string>
+
+    <string-array name="mode_options">
+        <item>Timer</item>
+        <item>Focus</item>
+    </string-array>
+
+    <string-array name="todo_priority">
+        <item>LOW</item>
+        <item>MEDIUM</item>
+        <item>HIGH</item>
+    </string-array>
 </resources>
