@@ -51,7 +51,7 @@
         android:drawableLeft="@drawable/ic_settings"
         android:id="@+id/profile_settings_btn"
         android:layout_width="match_parent"
-        android:layout_height="50sp"
+        android:layout_height="45sp"
         android:text="PROFILE SETINGS"
         android:gravity="center"
         android:layout_marginTop="20dp"
@@ -62,7 +62,7 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="50sp"
+        android:layout_height="45sp"
         android:text="CHANGE THEME"
         android:drawableLeft="@drawable/ic_dark_mode_24"
         android:layout_marginTop="10dp"
@@ -74,7 +74,7 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="50sp"
+        android:layout_height="45sp"
         android:text="ABOUT"
         android:drawableLeft="@drawable/ic_about"
         android:gravity="center"
@@ -90,7 +90,7 @@
         android:id="@+id/profile_share"
         android:drawableLeft="@drawable/ic_share"
         android:layout_width="match_parent"
-        android:layout_height="50sp"
+        android:layout_height="45sp"
         android:text="SHARE"
         android:gravity="center"
         android:layout_marginTop="10dp"
@@ -103,7 +103,7 @@
         android:id="@+id/profile_rate"
         android:drawableLeft="@drawable/ic_rate_us"
         android:layout_width="match_parent"
-        android:layout_height="50sp"
+        android:layout_height="45sp"
         android:text="Rate Us"
         android:gravity="center"
         android:layout_marginTop="10dp"
@@ -122,7 +122,7 @@
         android:id="@+id/btn_logout"
         android:drawableLeft="@drawable/ic_logout"
         android:layout_width="match_parent"
-        android:layout_height="50sp"
+        android:layout_height="45sp"
         android:text="LOG OUT"
         android:gravity="center"
         android:background="@drawable/custom_textview_bg"

@@ -17,5 +17,9 @@
         android:id="@+id/Score_nav"
         android:title="Score"
         android:icon="@drawable/ic_score"/>
+    <item
+        android:id="@+id/Friends_nav"
+        android:title="Friends"
+        android:icon="@drawable/ic_friends"/>
 
 </menu>
