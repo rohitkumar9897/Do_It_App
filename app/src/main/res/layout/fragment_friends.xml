@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_dark"
+    tools:context=".Fragments.FriendsFragment">
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/friends_tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black_light"
+        android:elevation="6dp"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/friends_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/friends_tab_layout"/>
+
+
+</RelativeLayout>
