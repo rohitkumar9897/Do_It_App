@@ -58,13 +58,16 @@ public class MainActivity extends AppCompatActivity{
                     getSupportFragmentManager().beginTransaction().replace(R.id.mainActivityFrameLayout, new FocusFragment()).commit();
                     return true;
                 } else if (itemId == R.id.Calendar_nav) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.mainActivityFrameLayout, new FriendsFragment()).commit();
                     Toast.makeText(MainActivity.this, "Calendar Selected", Toast.LENGTH_SHORT).show();
                     return true;
                 } else if (itemId == R.id.Score_nav) {
                     Toast.makeText(MainActivity.this, "Score Selected", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MainActivity.this, LeaderBoardActivity.class);
                     startActivity(intent);
+                    return true;
+                }else if (itemId == R.id.Friends_nav) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.mainActivityFrameLayout, new FriendsFragment()).commit();
+                    Toast.makeText(MainActivity.this, "Friends Section Selected", Toast.LENGTH_SHORT).show();
                     return true;
                 }
                 return false;
