@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import codeit.apps.doit.Fragments.FocusFragment;
+import codeit.apps.doit.Fragments.FriendsFragment;
 import codeit.apps.doit.Fragments.ToDoFragment;
 import codeit.apps.doit.LeaderBoard.LeaderBoardActivity;
 
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity{
                     getSupportFragmentManager().beginTransaction().replace(R.id.mainActivityFrameLayout, new FocusFragment()).commit();
                     return true;
                 } else if (itemId == R.id.Calendar_nav) {
+                    getSupportFragmentManager().beginTransaction().replace(R.id.mainActivityFrameLayout, new FriendsFragment()).commit();
                     Toast.makeText(MainActivity.this, "Calendar Selected", Toast.LENGTH_SHORT).show();
                     return true;
                 } else if (itemId == R.id.Score_nav) {
