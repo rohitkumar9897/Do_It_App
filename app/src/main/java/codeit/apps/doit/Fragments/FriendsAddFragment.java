@@ -1,22 +1,37 @@
 package codeit.apps.doit.Fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import codeit.apps.doit.R;
 
@@ -26,6 +41,8 @@ public class FriendsAddFragment extends Fragment {
     TextInputEditText usernameET;
     FirebaseFirestore db;
     CardView friendCard;
+    String searchUsername;
+    TextView searchFullName, searchUserName, searchCountry;
 
     public FriendsAddFragment() {
         // Required empty public constructor
@@ -50,29 +67,17 @@ public class FriendsAddFragment extends Fragment {
         db = FirebaseFirestore.getInstance();
 
 
-        searchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        searchBtn.setOnClickListener(v -> {
 
-                if(usernameET.getText().toString() == null){
-                    Toast.makeText(getContext(), "Please enter valid username", Toast.LENGTH_SHORT).show();
-
+            if(usernameET.getText().toString() == null){
+                Toast.makeText(getContext(), "Please enter valid username", Toast.LENGTH_SHORT).show();
+            }else{
+                searchUsername = usernameET.getText().toString();
+                if(searchIfUsernameExists(searchUsername)){
+                    friendCard.setVisibility(View.VISIBLE);
                 }else{
-                    String searchUsername = usernameET.getText().toString();
-
-                    if(searchIfUsernameExists(searchUsername)){
-                        friendCard.setVisibility(View.VISIBLE);
-
-
-                    }else{
-                        friendCard.setVisibility(View.GONE);
-
-                    }
-
+                    friendCard.setVisibility(View.GONE);
                 }
-
-
-
             }
         });
 
@@ -83,7 +88,44 @@ public class FriendsAddFragment extends Fragment {
         addFriendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                SharedPreferences sharedPreferences = getContext().getSharedPreferences("user_data", Context.MODE_PRIVATE);
+                String userName = sharedPreferences.getString("spusername", null);
+                Map<String, Object> friendData = new HashMap<>();
+                friendData.put("friendsList", Arrays.asList(searchUsername));
+
+
+                DocumentReference docRef = db.collection("friends").document(userName);
+                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        List<String> friendsList = new ArrayList<>();
+                        if (documentSnapshot.exists()) {
+                            // If document exists, get the current friends list
+                            friendsList = (List<String>) documentSnapshot.get("friendsList");
+                        }
+                        // Add the new friend to the list
+                        friendsList.add(searchUsername);
+
+                        // Update the friends list in Firestore
+                        Map<String, Object> friendData = new HashMap<>();
+                        friendData.put("friendsList", friendsList);
+
+                        docRef.set(friendData) // Overwrite the entire document with the updated friends list
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(getContext(), "Friend added", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.e("Firestore", "Error adding friend", e);
+                                        Toast.makeText(getContext(), "Error adding friend", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
+                });
             }
         });
 
@@ -105,8 +147,11 @@ public class FriendsAddFragment extends Fragment {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()){
                         exists[0] = true;
+                        setOnCard(searchUsername);
+                        friendCard.setVisibility(View.VISIBLE);
                     }else{
                         exists[0] = false;
+                        Toast.makeText(getContext(), "Username doesn't exist", Toast.LENGTH_SHORT).show();
                     }
                 }else{
                     Toast.makeText(getContext(), "Some error occurred", Toast.LENGTH_SHORT).show();
@@ -120,5 +165,17 @@ public class FriendsAddFragment extends Fragment {
 
 
 
+    }
+
+    private void setOnCard(String searchUsername) {
+        db.collection("users").document(searchUsername).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if(documentSnapshot.exists()){
+
+
+                }
+            }
+        });
     }
 }

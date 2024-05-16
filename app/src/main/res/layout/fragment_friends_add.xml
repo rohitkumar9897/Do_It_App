@@ -38,7 +38,9 @@
         android:layout_gravity="end"
         android:text="Search"
         android:textColor="@color/white"
-        android:layout_margin="16dp"/>
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"/>
 
 
 
@@ -46,33 +48,47 @@
         android:id="@+id/add_friend_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="10dp"
+        android:elevation="5dp"
         android:layout_margin="16dp"
         style="@style/Base.Theme.DoIt"
         android:visibility="visible"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="5dp">
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/black_light"
+            android:background="@drawable/todo_item_bg"
+
             android:orientation="vertical">
 
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp"
+                android:src="@drawable/logo"/>
+
             <TextView
-                android:layout_margin="8dp"
+                android:id="@+id/searched_full_name_tv"
+                android:layout_margin="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="name"/>
             <TextView
-                android:layout_margin="8dp"
+                android:id="@+id/searched_username_tv"
+                android:layout_margin="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="username"/>
 
             <TextView
-                android:layout_margin="8dp"
+                android:id="@+id/searched_country_tv"
+                android:layout_margin="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:text="country : india"/>
 
             <Button
@@ -80,6 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Add friend"
+                android:layout_gravity="center"
                 android:layout_margin="4dp"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
