@@ -188,81 +188,19 @@ public class FocusFragment extends Fragment {
     private void pushToBase(long pushTime) {
         String username = sharedPreferences.getString("spusername", null);
         //3000 = 3 seconds
-
-        Calendar calendar  = Calendar.getInstance();
-        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-        int weekOfYear = calendar.get(Calendar.WEEK_OF_YEAR);
-        int monthOfYear = calendar.get(Calendar.MONTH);
-
-
-
-
-        db.collection("users").document(username).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
-                    DocumentSnapshot document = task.getResult();
-                    Log.d("priyanshudebug", "4");
-                    if (document != null && document.exists()) {
-                        Log.d("priyanshudebug", "3");
-                        int storedDay = document.getLong("storedDay").intValue();
-                        int storedWeek  = document.getLong("storedWeek").intValue();
-                        int storedMonth = document.getLong("storedMonth").intValue();
-
-                        Map<String, Object> updates = new HashMap<>();
-
-
-                        if(storedDay!=dayOfMonth){
-                            Log.d("priyanshudebug", "2");
-                            updates.put("dailyScore", 0);
-                            updates.put("storedDay", dayOfMonth);
-
-
-                        }
-                        if(storedWeek!=weekOfYear){
-                            Log.d("priyanshudebug", "1");
-                            updates.put("weeklyScore", 0);
-                            updates.put("storedWeek", weekOfYear);
-
-                        }
-                        if(storedMonth!=monthOfYear){
-                            updates.put("monthlyScore", 0);
-                            updates.put("storedMonth", monthOfYear);
-
-                        }
-
-                        db.collection("users").document(username).update(updates);
-
-                    }
-                }else{
-                    Toast.makeText(getContext(), "some error occurred", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });
-
-
-
-
-
         Map<String, Object> updates = new HashMap<>();
         updates.put("dailyScore", FieldValue.increment(pushTime));
         updates.put("weeklyScore", FieldValue.increment(pushTime));
         updates.put("monthlyScore", FieldValue.increment(pushTime));
-
-
-
-
-
         db.collection("users").document(username).update(updates).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                Toast.makeText(getContext(), "updated", Toast.LENGTH_SHORT).show();
+                Log.d("app_insights", "time pushed successfully");
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getContext(), "not updated", Toast.LENGTH_SHORT).show();
+                Log.d("app_insights", "error in pushing time");
 
             }
         });

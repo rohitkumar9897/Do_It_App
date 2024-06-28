@@ -9,10 +9,11 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:id="@+id/topLinearLayoutMA"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="#333C4B">
+        android:background="@color/black_light">
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"

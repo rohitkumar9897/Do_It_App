@@ -36,7 +36,7 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ScoreViewAda
     public void onBindViewHolder(@NonNull ScoreViewAdapter holder, int position) {
         ScoreData currentItem= list.get(position);
         holder.name.setText(currentItem.getName());
-        holder.score.setText(String.valueOf(currentItem.getScore()));
+        holder.score.setText(String.valueOf(currentItem.getDailyScore()));
         holder.rank.setText(String.valueOf(i));
         i++;
 

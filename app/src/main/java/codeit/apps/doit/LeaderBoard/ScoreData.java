@@ -1,16 +1,37 @@
 package codeit.apps.doit.LeaderBoard;
 
 public class ScoreData {
-    String name, image;
-    long score;
+    String age, country, name, username;
+    int dailyScore, monthlyScore, weeklyScore;
 
-    public ScoreData() {
+    public String getAge() {
+        return age;
     }
 
-    public ScoreData(String name, String image, long score) {
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public ScoreData() {
+        // Default constructor
+    }
+
+    public ScoreData(String age, String country, String name, String username, int dailyScore, int monthlyScore, int weeklyScore) {
+        this.age = age;
+        this.country = country;
         this.name = name;
-        this.image = image;
-        this.score = score;
+        this.username = username;
+        this.dailyScore = dailyScore;
+        this.monthlyScore = monthlyScore;
+        this.weeklyScore = weeklyScore;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getName() {
@@ -21,19 +42,35 @@ public class ScoreData {
         this.name = name;
     }
 
-    public String getImage() {
-        return image;
+    public String getUsername() {
+        return username;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public long getScore() {
-        return score;
+    public int getDailyScore() {
+        return dailyScore;
     }
 
-    public void setScore(long score) {
-        this.score = score;
+    public void setDailyScore(int dailyScore) {
+        this.dailyScore = dailyScore;
+    }
+
+    public int getMonthlyScore() {
+        return monthlyScore;
+    }
+
+    public void setMonthlyScore(int monthlyScore) {
+        this.monthlyScore = monthlyScore;
+    }
+
+    public int getWeeklyScore() {
+        return weeklyScore;
+    }
+
+    public void setWeeklyScore(int weeklyScore) {
+        this.weeklyScore = weeklyScore;
     }
 }
