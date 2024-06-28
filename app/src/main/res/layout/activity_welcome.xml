@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:background="@color/black_dark"
+    android:padding="20sp">
+
+    <TextView
+        android:layout_marginTop="64dp"
+        android:text="Welcome to"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/yellow_use"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:id="@+id/welcome_logo"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/logo"
+        android:layout_width="120sp"
+        android:elevation="10dp"
+        android:layout_height="120sp"/>
+
+    <TextView
+
+        android:layout_marginTop="36dp"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:gravity="center"
+        android:textColor="@color/yellow_use"
+        android:text="Let's make every task a accomplishment together"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:text="Login"
+        android:background="@drawable/button_bg"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="55sp"/>
+    <Button
+        android:id="@+id/btn_signup"
+        android:background="@drawable/streak_btn_bg"
+        android:text="Signup"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="10sp"
+        android:layout_width="match_parent"
+        android:layout_height="55sp"/>
+
+</LinearLayout>
